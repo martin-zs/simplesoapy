@@ -402,7 +402,7 @@ class SoapyDevice:
             freqs = self.device.getFrequencyRange(SoapySDR.SOAPY_SDR_RX, self._channel)
             # return the minimum and maximym of the entire frequency range, to keep it very simple
             # assume that lower layer will deal with tuning to a gap in the frequency range
-        return (freq[0].minimum(), freq[len(freqs)-1].maximum())
+        return (freqs[0].minimum(), freqs[len(freqs)-1].maximum())
 
     def get_setting(self, setting_name):
         """Get value of given device setting"""
