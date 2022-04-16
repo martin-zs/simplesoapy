@@ -436,7 +436,7 @@ class SoapyDevice:
 
         self.buffer = numpy.empty(buffer_size, numpy.complex64)
         self.buffer_overflow_count = 0
-        self.stream_timeout = stream_timeout or 0.1 + (buffer_size / self.sample_rate)
+        self.stream_timeout = stream_timeout or 2.0 + (buffer_size / self.sample_rate)
         logger.debug('SoapySDR stream - buffer size: {}'.format(buffer_size))
         logger.debug('SoapySDR stream - read timeout: {:.6f}'.format(self.stream_timeout))
 
