@@ -397,10 +397,12 @@ class SoapyDevice:
         if tunable_name:
             if tunable_name not in self.list_frequencies():
                 raise ValueError('Unknown tunable element!')
-            freq = self.device.getFrequencyRange(SoapySDR.SOAPY_SDR_RX, self._channel, tunable_name)[0]
+            freqs = self.device.getFrequencyRange(SoapySDR.SOAPY_SDR_RX, self._channel, tunable_name)
         else:
-            freq = self.device.getFrequencyRange(SoapySDR.SOAPY_SDR_RX, self._channel)[0]
-        return (freq.minimum(), freq.maximum())
+            freqs = self.device.getFrequencyRange(SoapySDR.SOAPY_SDR_RX, self._channel)
+            # return the minimum and maximym of the entire frequency range, to keep it very simple
+            # assume that lower layer will deal with tuning to a gap in the frequency range
+        return (freq[0].minimum(), freq[len(freqs)-1].maximum())
 
     def get_setting(self, setting_name):
         """Get value of given device setting"""
